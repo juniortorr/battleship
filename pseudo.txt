@@ -1,0 +1,47 @@
+Ship Class: 
+    Constructor:
+        - Length
+        - Tracker for Hits 
+        - Sunk (Boolean)
+    hit():
+        +1 on hit tracker 
+        return hit tracker ex: 3/4?
+    isSunk(): 
+        if hit tracker is equal to length
+            sunk: true;
+            return hit tracker and sunk or afloat message;
+        else 
+            return how many times it's been hit
+
+Gameboard Class: 
+    Constructor: 
+        - create board (arr (x, y coordinates))
+        - missed attacks 
+        - ships alive
+    PlaceShip(coordinates, ship):
+        loops over the ship length and changes the value of the coordinate to the ship;
+    receiveAttack(coordinates)
+        if this.board[y][x] is undefined
+            +1 missed attacks  
+            return no hit 
+        else 
+            if ship.hit() 
+            if ship.isSunk() === true
+                shipsAlive - 1
+            else return hit;
+Player Class:
+    Constructor: 
+        isTurn: true or false,
+    setIsTurn() 
+        change turn status 
+
+Computer 
+    selectRandomCoordinates()
+        math.random for x
+        math.random for y
+        return x, y
+    
+        
+
+    
+        
