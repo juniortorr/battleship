@@ -7,6 +7,10 @@ export default class Ship {
 
   hit() {
     this.hitTracker += 1;
+    this.isSunk();
+    if (this.sunk === true) {
+      return 'sunk!';
+    }
     return this.hitTracker;
   }
 
@@ -15,6 +19,6 @@ export default class Ship {
       this.sunk = true;
       return true;
     }
-    return this.hitTracker();
+    return false;
   }
 }
