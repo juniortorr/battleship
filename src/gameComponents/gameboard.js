@@ -3,8 +3,9 @@ import Ship from './ship';
 export default class GameBoard {
   constructor() {
     this.board = [...new Array(10)].map(() => new Array(10).fill(null));
+    this.isTurn = false;
     this.missedAttacks = 0;
-    this.shipsAlive = 5;
+    this.shipsAlive = 3;
     this.smallShip = new Ship(2);
     this.medShip = new Ship(3);
     this.lrgShip = new Ship(5);
@@ -67,6 +68,13 @@ export default class GameBoard {
     if (hitResults === 'sunk!') {
       this.shipsAlive -= 1;
     }
-    return hitResults;
+    return `hit! ${hitResults}`;
+  }
+
+  checkShipsAlive() {
+    if (this.shipsAlive === 0) {
+      return 'game over';
+    }
+    return this.shipsAlive;
   }
 }
