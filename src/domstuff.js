@@ -12,7 +12,10 @@ export default (function domstuff() {
       for (let i = 0; i < row.length; i += 1) {
         const gridUnit = document.createElement('div');
         const spotIndex = i;
-        gridUnit.classList.add('grid-unit');
+        if (row[i] !== null) {
+          gridUnit.classList.add('ship');
+        }
+        gridUnit.classList.add('board-unit');
         gridUnit.setAttribute('data-set', [spotIndex, rowIndex]);
         gridRow.append(gridUnit);
       }
