@@ -16,7 +16,7 @@ export default class GameBoard {
     let { length } = ship;
     while (length !== 0) {
       if (xInt + (length - 1) > 9 || xInt < 0) {
-        return 'invalid coordinates';
+        return console.log('invalid coordinates', x, y, ship);
       }
       this.board[y][xInt] = ship;
       coordinatesArr.push([xInt, y]);
@@ -31,7 +31,7 @@ export default class GameBoard {
     let { length } = ship;
     while (length !== 0) {
       if (yInt + (length - 1) > 9 || yInt < 0) {
-        return 'invalid coordinates';
+        return console.log('invalid coordinates', x, y, ship);
       }
       this.board[yInt][x] = ship;
       coordinatesArr.push([yInt, x]);
