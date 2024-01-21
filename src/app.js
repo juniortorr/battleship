@@ -1,6 +1,7 @@
-// import './styles.css';
+import './styles.css';
 import GameBoard from './gameComponents/gameboard';
 import changeTurn from './gameComponents/players';
+import domstuff from './domstuff';
 
 const randomDirection = () => {
   if (Math.floor(Math.random() * 10) < 5) {
@@ -30,14 +31,17 @@ const gameLoop = () => {
   changeTurn(computer);
   randomlyPlaceShips(player1);
   randomlyPlaceShips(computer);
-  const coordinates = randomCoordinates();
-  player1.receiveAttack(coordinates[0], coordinates[1]);
-  if (player1.checkShipsAlive() === 'game over') {
-    console.log('Game Over! New Game');
-    gameLoop();
-  }
-  changeTurn(player1);
-  changeTurn(computer);
+  domstuff.createPlayerBoard(player1.board);
+  // const coordinates = randomCoordinates();
+  // player1.receiveAttack(coordinates[0], coordinates[1]);
+  // if (player1.checkShipsAlive() === 'game over') {
+  //   console.log('Game Over! New Game');
+  //   gameLoop();
+  // }
+  // changeTurn(player1);
+  // changeTurn(computer);
 };
+
+gameLoop();
 
 export { randomlyPlaceShips, gameLoop };
