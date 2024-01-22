@@ -77,4 +77,11 @@ export default class GameBoard {
     }
     return this.shipsAlive;
   }
+
+  // eslint-disable-next-line class-methods-use-this
+  getComputerChoice() {
+    const x = Math.floor(Math.random() * 10);
+    const y = Math.floor(Math.random() * 10);
+    return [x, y];
+  }
 }

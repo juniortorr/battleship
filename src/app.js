@@ -2,8 +2,6 @@ import './styles.css';
 import GameBoard from './gameComponents/gameboard';
 // eslint-disable-next-line import/no-cycle
 import domstuff from './domstuff';
-// eslint-disable-next-line import/no-cycle
-import handleComputerAttack from './gameComponents/computer';
 
 const createPlayer = () => new GameBoard();
 let computer = createPlayer();
@@ -54,24 +52,34 @@ const handleGameOver = () => {
   gameLoop();
 };
 
+// Event Handlers ======>
+
+function handleComputerAttack() {
+  const choice = computer.getComputerChoice();
+  console.log('player receiving attack:', player1.receiveAttack(choice[0], choice[1]));
+  console.log('player checking fleet:', player1.checkShipsAlive());
+  return console.log(player1.checkShipsAlive());
+}
+
 function handleSendAttack(e) {
   const selectedSpot = e.target;
   const coordinatesString = selectedSpot.getAttribute('data-set');
   const coordinates = coordinatesString.split(',');
-  console.log(
-    'computer: receiving attack:',
-    computer.receiveAttack(coordinates[0], coordinates[1])
-  );
-  console.log('computer: check ships alive', computer.checkShipsAlive());
-  if (computer.checkShipsAlive() === 'game over') {
+  const hitResults = computer.receiveAttack(coordinates[0], coordinates[1]);
+
+  if (hitResults.includes('hit!')) {
+    return console.log('hit');
+  }
+  if (hitResults.includes('miss')) {
+    // add dom function to mark it as missed
+    return console.log('miss loser');
+  }
+  if (hitResults === 'game over') {
     return handleGameOver();
   }
-  if (handleComputerAttack(player1) === 'game over') {
-    return handleGameOver();
-  }
-  return player1.checkShipsAlive();
+  return hitResults;
 }
 
 gameLoop();
 
-export { randomlyPlaceShips, gameLoop, handleSendAttack, handleGameOver };
+export { randomlyPlaceShips, gameLoop, handleSendAttack, handleGameOver, handleComputerAttack };

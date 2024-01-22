@@ -1,9 +1,8 @@
 // eslint-disable-next-line import/no-cycle
-import { handleSendAttack } from './app';
+import { handleSendAttack, handleComputerAttack } from './app';
 
 export default (function domstuff() {
   const boardContainer = document.querySelector('.gameboard-container');
-  const sendAttack = document.querySelector('.send-attack');
 
   const reset = () => {
     const gridRow = document.querySelector('.board-row');
@@ -35,15 +34,13 @@ export default (function domstuff() {
         gridUnit.classList.add('board-unit');
         gridUnit.setAttribute('data-set', [spotIndex, rowIndex]);
         if (computer === true) {
-          gridUnit.addEventListener('click', handleSendAttack);
+          gridUnit.addEventListener('click', handleSendAttack, handleComputerAttack);
           gridUnit.classList.add('computer');
         }
         gridRow.append(gridUnit);
       }
     });
   };
-
-  sendAttack.addEventListener('click', handleSendAttack);
 
   return { handleSendAttack, createPlayerBoard, reset };
 })();
