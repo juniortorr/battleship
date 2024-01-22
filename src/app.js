@@ -2,7 +2,6 @@ import './styles.css';
 import GameBoard from './gameComponents/gameboard';
 import changeTurn from './gameComponents/players';
 import domstuff from './domstuff';
-import Ship from './gameComponents/ship';
 
 const randomDirection = () => {
   if (Math.floor(Math.random() * 10) < 5) {
