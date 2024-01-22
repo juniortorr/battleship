@@ -27,3 +27,6 @@ h1 {
 .missed {
   background-color: grey;
 }
+.hit {
+  background-color: rebeccapurple;
+}

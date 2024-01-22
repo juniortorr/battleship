@@ -47,5 +47,10 @@ export default (function domstuff() {
     unit.setAttribute('missed', true);
   };
 
-  return { handleSendAttack, createPlayerBoard, reset, targetMissed };
+  const targetHit = (unit) => {
+    unit.classList.add('hit');
+    unit.setAttribute('hit', true);
+  };
+
+  return { handleSendAttack, createPlayerBoard, reset, targetMissed, targetHit };
 })();

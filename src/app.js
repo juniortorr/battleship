@@ -68,6 +68,7 @@ function handleSendAttack(e) {
   const hitResults = computer.receiveAttack(coordinates[0], coordinates[1]);
 
   if (hitResults.includes('hit!')) {
+    domstuff.targetHit(selectedSpot);
     return console.log('hit');
   }
   if (hitResults.includes('miss')) {
