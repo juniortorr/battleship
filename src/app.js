@@ -71,7 +71,7 @@ function handleSendAttack(e) {
     return console.log('hit');
   }
   if (hitResults.includes('miss')) {
-    // add dom function to mark it as missed
+    domstuff.targetMissed(selectedSpot);
     return console.log('miss loser');
   }
   if (hitResults === 'game over') {

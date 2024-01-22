@@ -42,5 +42,10 @@ export default (function domstuff() {
     });
   };
 
-  return { handleSendAttack, createPlayerBoard, reset };
+  const targetMissed = (unit) => {
+    unit.classList.add('missed');
+    unit.setAttribute('missed', true);
+  };
+
+  return { handleSendAttack, createPlayerBoard, reset, targetMissed };
 })();

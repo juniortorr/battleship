@@ -23,3 +23,7 @@ h1 {
 .ship {
   background-color: #4b5320;
 }
+
+.missed {
+  background-color: grey;
+}
