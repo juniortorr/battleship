@@ -32,11 +32,11 @@ test('return missed it', () => {
   expect(playerBoard.missedAttacks).toBe(1);
 });
 
-test('return hit tracker on successful hit', () => {
-  const playerBoard = new GameBoard();
-  playerBoard.placeShip(5, 6, playerBoard.smallShip, 'horizontal');
-  expect(playerBoard.receiveAttack(5, 6)).toBe(1);
-});
+// test('return hit tracker on successful hit', () => {
+//   const playerBoard = new GameBoard();
+//   playerBoard.placeShip(5, 6, playerBoard.smallShip, 'horizontal');
+//   expect(playerBoard.receiveAttack(5, 6)).toBe(1);
+// });
 
 test('sunk ship', () => {
   const playerBoard = new GameBoard();

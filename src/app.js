@@ -1,11 +1,13 @@
 import './styles.css';
 import GameBoard from './gameComponents/gameboard';
-import changeTurn from './gameComponents/players';
 // eslint-disable-next-line import/no-cycle
 import domstuff from './domstuff';
+// eslint-disable-next-line import/no-cycle
+import handleComputerAttack from './gameComponents/computer';
 
-const createComputer = () => new GameBoard();
-let computer = createComputer();
+const createPlayer = () => new GameBoard();
+let computer = createPlayer();
+let player1 = createPlayer();
 
 const randomDirection = () => {
   if (Math.floor(Math.random() * 10) < 5) {
@@ -39,35 +41,37 @@ const randomlyPlaceShips = (player) => {
 };
 
 const gameLoop = () => {
-  const player1 = new GameBoard();
-  changeTurn(computer);
   randomlyPlaceShips(player1);
   randomlyPlaceShips(computer);
-  // randomlyPlaceShips(computer);
   domstuff.createPlayerBoard(player1.board);
   domstuff.createPlayerBoard(computer.board, true);
-  // const coordinates = randomCoordinates();
-  // player1.receiveAttack(coordinates[0], coordinates[1]);
-  // if (player1.checkShipsAlive() === 'game over') {
-  //   console.log('Game Over! New Game');
-  //   gameLoop();
-  // }
-  // changeTurn(player1);
-  // changeTurn(computer);
 };
+
+const handleGameOver = () => {
+  computer = createPlayer();
+  player1 = createPlayer();
+  domstuff.reset();
+  gameLoop();
+};
+
 function handleSendAttack(e) {
   const selectedSpot = e.target;
   const coordinatesString = selectedSpot.getAttribute('data-set');
   const coordinates = coordinatesString.split(',');
-  console.log('receiving attack:', computer.receiveAttack(coordinates[0], coordinates[1]));
-  console.log('check ships alive', computer.checkShipsAlive());
+  console.log(
+    'computer: receiving attack:',
+    computer.receiveAttack(coordinates[0], coordinates[1])
+  );
+  console.log('computer: check ships alive', computer.checkShipsAlive());
   if (computer.checkShipsAlive() === 'game over') {
-    computer = createComputer();
-    domstuff.reset();
-    gameLoop();
+    return handleGameOver();
   }
+  if (handleComputerAttack(player1) === 'game over') {
+    return handleGameOver();
+  }
+  return player1.checkShipsAlive();
 }
 
 gameLoop();
 
-export { randomlyPlaceShips, gameLoop, handleSendAttack };
+export { randomlyPlaceShips, gameLoop, handleSendAttack, handleGameOver };
