@@ -44,9 +44,16 @@ Computer
         
 
     
-     - If user clicks on a spot that has already been clicked, alert 'already used these coordinates'
-        - change 'hit' and 'missed' data attributes to one unified 'data-hit' true or false
     - On game over, display a pop up that allows you to start the game over
     - Add a scoreboard object to keep track of the scores
     -  add html hook for scoreboard
     - 
+
+    Place Ships Logic:
+        Create a list of the ships so we can loop through them on HTML interface creation [this.med, this.etc];
+        Loop through the list and create a png for each one;
+            Drag and Drop 
+                or
+            Click on ship to Open popup
+                Popup confirm will call placeShip(x, y, ship, direction);
+        
