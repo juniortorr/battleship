@@ -43,6 +43,7 @@ const gameLoop = () => {
   computer.setComputerChoiceBank();
   domstuff.createPlayerBoard(player1.board);
   domstuff.createPlayerBoard(computer.board, true);
+  domstuff.createShipList(player1);
 };
 
 const handleGameOver = () => {

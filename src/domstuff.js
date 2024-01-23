@@ -43,6 +43,18 @@ export default (function domstuff() {
     });
   };
 
+  const createShipList = (player) => {
+    const shipContainer = document.querySelector('.ship-container');
+    const allShips = [player.smallShip, player.medShip, player.lrgShip];
+    allShips.forEach((boat) => {
+      const shipIcon = document.createElement('div');
+      const shipPlacementHolder = document.createElement('h1');
+      shipPlacementHolder.textContent = boat.length;
+      shipContainer.append(shipIcon);
+      shipIcon.append(shipPlacementHolder);
+    });
+  };
+
   const targetMissed = (unit) => {
     unit.classList.add('missed');
     unit.setAttribute('data-targeted', true);
@@ -58,5 +70,13 @@ export default (function domstuff() {
     return spot;
   };
 
-  return { handleSendAttack, createPlayerBoard, reset, targetMissed, targetHit, getSpot };
+  return {
+    handleSendAttack,
+    createPlayerBoard,
+    reset,
+    targetMissed,
+    targetHit,
+    getSpot,
+    createShipList,
+  };
 })();
