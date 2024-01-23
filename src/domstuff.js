@@ -25,6 +25,7 @@ export default (function domstuff() {
       const rowIndex = board.indexOf(row);
       gridRow.classList.add('board-row');
       playerContainer.prepend(gridRow);
+      gridRow.setAttribute('data-row', board.indexOf(row));
       for (let i = 0; i < row.length; i += 1) {
         const gridUnit = document.createElement('div');
         const spotIndex = i;
@@ -34,7 +35,8 @@ export default (function domstuff() {
         gridUnit.classList.add('board-unit');
         gridUnit.setAttribute('data-set', [spotIndex, rowIndex]);
         if (computer === true) {
-          gridUnit.addEventListener('click', handleSendAttack, handleComputerAttack);
+          gridUnit.addEventListener('click', handleSendAttack);
+          gridUnit.addEventListener('click', handleComputerAttack);
           gridUnit.classList.add('computer');
         }
         gridRow.append(gridUnit);
@@ -52,5 +54,10 @@ export default (function domstuff() {
     unit.setAttribute('hit', true);
   };
 
-  return { handleSendAttack, createPlayerBoard, reset, targetMissed, targetHit };
+  const getSpot = (coordinates) => {
+    const spot = document.querySelector(`[data-set="${coordinates[0]},${coordinates[1]}"]`);
+    return spot;
+  };
+
+  return { handleSendAttack, createPlayerBoard, reset, targetMissed, targetHit, getSpot };
 })();

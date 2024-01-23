@@ -5,10 +5,24 @@ export default class GameBoard {
     this.board = [...new Array(10)].map(() => new Array(10).fill(null));
     this.isTurn = false;
     this.missedAttacks = 0;
+    this.computerChoiceBank = null;
+    this.computerChoiceOpts = 100;
     this.shipsAlive = 3;
     this.smallShip = new Ship(2);
     this.medShip = new Ship(3);
     this.lrgShip = new Ship(5);
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  setComputerChoiceBank() {
+    const copy = [];
+    for (let i = 0; i < 10; i += 1) {
+      for (let j = 0; j < 10; j += 1) {
+        copy.push([i, j]);
+      }
+    }
+    console.log(copy);
+    this.computerChoiceBank = copy;
   }
 
   horizontalShipPlace(x, y, ship, coordinatesArr) {
@@ -80,8 +94,11 @@ export default class GameBoard {
 
   // eslint-disable-next-line class-methods-use-this
   getComputerChoice() {
-    const x = Math.floor(Math.random() * 10);
-    const y = Math.floor(Math.random() * 10);
-    return [x, y];
+    const randomInt = Math.floor(Math.random() * this.computerChoiceOpts);
+    const choice = this.computerChoiceBank[randomInt];
+    const removeChoice = this.computerChoiceBank.splice(randomInt, 1);
+    this.computerChoiceOpts -= 1;
+    console.log(removeChoice, this.computerChoiceBank);
+    return choice;
   }
 }

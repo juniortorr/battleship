@@ -32,7 +32,6 @@ const randomlyPlaceShips = (player) => {
   const allShips = [player.smallShip, player.medShip, player.lrgShip];
   allShips.forEach((ship) => {
     const coordinates = randomCoordinates(ship, player.board);
-    console.log(coordinates);
     player.placeShip(coordinates[0], coordinates[1], ship, coordinates[2]);
   });
   return 'success';
@@ -41,6 +40,7 @@ const randomlyPlaceShips = (player) => {
 const gameLoop = () => {
   randomlyPlaceShips(player1);
   randomlyPlaceShips(computer);
+  computer.setComputerChoiceBank();
   domstuff.createPlayerBoard(player1.board);
   domstuff.createPlayerBoard(computer.board, true);
 };
@@ -52,13 +52,29 @@ const handleGameOver = () => {
   gameLoop();
 };
 
+const checkHitResults = (results, spot) => {
+  if (results.includes('hit!')) {
+    domstuff.targetHit(spot);
+    return console.log('player 1 hit');
+  }
+  if (results.includes('miss')) {
+    domstuff.targetMissed(spot);
+    return console.log('computer missed ya nerd');
+  }
+  if (results === 'game over') {
+    return handleGameOver();
+  }
+  return results;
+};
+
 // Event Handlers ======>
 
 function handleComputerAttack() {
   const choice = computer.getComputerChoice();
-  console.log('player receiving attack:', player1.receiveAttack(choice[0], choice[1]));
+  const spot = domstuff.getSpot(choice);
+  const hitResults = player1.receiveAttack(choice[0], choice[1]);
   console.log('player checking fleet:', player1.checkShipsAlive());
-  return console.log(player1.checkShipsAlive());
+  return checkHitResults(hitResults, spot);
 }
 
 function handleSendAttack(e) {
@@ -66,21 +82,10 @@ function handleSendAttack(e) {
   const coordinatesString = selectedSpot.getAttribute('data-set');
   const coordinates = coordinatesString.split(',');
   const hitResults = computer.receiveAttack(coordinates[0], coordinates[1]);
-
-  if (hitResults.includes('hit!')) {
-    domstuff.targetHit(selectedSpot);
-    return console.log('hit');
-  }
-  if (hitResults.includes('miss')) {
-    domstuff.targetMissed(selectedSpot);
-    return console.log('miss loser');
-  }
-  if (hitResults === 'game over') {
-    return handleGameOver();
-  }
-  return hitResults;
+  return checkHitResults(hitResults, selectedSpot);
 }
 
 gameLoop();
+console.log(computer.computerCopy);
 
 export { randomlyPlaceShips, gameLoop, handleSendAttack, handleGameOver, handleComputerAttack };
