@@ -21,7 +21,6 @@ export default class GameBoard {
         copy.push([i, j]);
       }
     }
-    console.log(copy);
     this.computerChoiceBank = copy;
   }
 

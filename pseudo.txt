@@ -44,4 +44,9 @@ Computer
         
 
     
-        
+     - If user clicks on a spot that has already been clicked, alert 'already used these coordinates'
+        - change 'hit' and 'missed' data attributes to one unified 'data-hit' true or false
+    - On game over, display a pop up that allows you to start the game over
+    - Add a scoreboard object to keep track of the scores
+    -  add html hook for scoreboard
+    - 

@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-cycle
-import { handleSendAttack, handleComputerAttack } from './app';
+import { handleSendAttack } from './app';
 
 export default (function domstuff() {
   const boardContainer = document.querySelector('.gameboard-container');
@@ -36,7 +36,6 @@ export default (function domstuff() {
         gridUnit.setAttribute('data-set', [spotIndex, rowIndex]);
         if (computer === true) {
           gridUnit.addEventListener('click', handleSendAttack);
-          gridUnit.addEventListener('click', handleComputerAttack);
           gridUnit.classList.add('computer');
         }
         gridRow.append(gridUnit);
@@ -46,12 +45,12 @@ export default (function domstuff() {
 
   const targetMissed = (unit) => {
     unit.classList.add('missed');
-    unit.setAttribute('missed', true);
+    unit.setAttribute('data-targeted', true);
   };
 
   const targetHit = (unit) => {
     unit.classList.add('hit');
-    unit.setAttribute('hit', true);
+    unit.setAttribute('data-targeted', true);
   };
 
   const getSpot = (coordinates) => {

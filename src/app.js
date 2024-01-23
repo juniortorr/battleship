@@ -73,15 +73,20 @@ function handleComputerAttack() {
   const choice = computer.getComputerChoice();
   const spot = domstuff.getSpot(choice);
   const hitResults = player1.receiveAttack(choice[0], choice[1]);
-  console.log('player checking fleet:', player1.checkShipsAlive());
+  console.log('player ships alive:', player1.checkShipsAlive());
   return checkHitResults(hitResults, spot);
 }
 
 function handleSendAttack(e) {
   const selectedSpot = e.target;
+  if (selectedSpot.hasAttribute('data-targeted')) {
+    return alert('dont do this');
+  }
   const coordinatesString = selectedSpot.getAttribute('data-set');
   const coordinates = coordinatesString.split(',');
   const hitResults = computer.receiveAttack(coordinates[0], coordinates[1]);
+  console.log('computer ships alive:', computer.checkShipsAlive());
+  handleComputerAttack();
   return checkHitResults(hitResults, selectedSpot);
 }
 
