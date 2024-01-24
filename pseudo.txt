@@ -57,3 +57,11 @@ Computer
             Click on ship to Open popup
                 Popup confirm will call placeShip(x, y, ship, direction);
         
+
+        TOMORROW!!!!!
+            - call placeShip() in the handledrop function
+            - make a function that updates the client side UI?
+            - create end game pop up
+            - create a place ships prompt for when users first load into the game
+            - create a start over button 
+            - display the amount of time that a user and computer have missed
