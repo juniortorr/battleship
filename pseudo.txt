@@ -49,19 +49,29 @@ Computer
     -  add html hook for scoreboard
     - 
 
-    Place Ships Logic:
-        Create a list of the ships so we can loop through them on HTML interface creation [this.med, this.etc];
-        Loop through the list and create a png for each one;
-            Drag and Drop 
-                or
-            Click on ship to Open popup
-                Popup confirm will call placeShip(x, y, ship, direction);
-        
-
         TOMORROW!!!!!
-            - call placeShip() in the handledrop function
-            - make a function that updates the client side UI?
             - create end game pop up
             - create a place ships prompt for when users first load into the game
             - create a start over button 
             - display the amount of time that a user and computer have missed
+            - hide the computers board at beginning of game maybe? (have to block moves from happening before placing ships)    
+            - get(or create!) images for ships 
+
+
+Current Process: 
+    Randomly place ships to build board in the backend 
+    create the board for each player
+    show ships by adding the ship class to the board in the creation Process
+
+Goal Process: 
+    Update the backend on Drop (placeShip)
+    Update the UI to match back end 
+        Options: 
+            1. Loop through every spot and rewrite the changed ones
+            2. If statement depending on direction
+                - Manually select the corresponding divs that need updating?
+            3. Change to a grid system so that you can use corresponding grid spots to stretch content;
+            4. Screw linking them, they already work hand in hand with the recieve attack functions and data-sets
+                -Make the Ship slightly transparent and set the z index higher so that it floats 
+                - overlap over grid. when spot is hit, set index of spot to be higher
+            
