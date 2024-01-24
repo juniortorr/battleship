@@ -38,7 +38,6 @@ const randomlyPlaceShips = (player) => {
 };
 
 const gameLoop = () => {
-  randomlyPlaceShips(player1);
   randomlyPlaceShips(computer);
   computer.setComputerChoiceBank();
   domstuff.createPlayerBoard(player1.board);

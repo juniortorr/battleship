@@ -36,3 +36,26 @@ h1 {
   margin: 0 auto;
   gap: 20px;
 }
+.slider-container {
+  position: relative;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  box-sizing: border-box;
+}
+
+.slider {
+  position: absolute;
+  height: 100%;
+  width: 50%;
+  left: 0;
+  background-color: lightblue;
+}
+
+.direction {
+  z-index: 1;
+  width: 50%;
+  text-align: center;
+}
