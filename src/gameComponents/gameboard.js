@@ -11,6 +11,7 @@ export default class GameBoard {
     this.smallShip = new Ship(2);
     this.medShip = new Ship(3);
     this.lrgShip = new Ship(5);
+    this.allShips = [this.smallShip, this.medShip, this.lrgShip];
   }
 
   // eslint-disable-next-line class-methods-use-this

@@ -70,6 +70,25 @@ const checkHitResults = (results, spot) => {
 
 // Event Handlers ======>
 
+function handleDrop(e) {
+  e.preventDefault();
+  const data = e.dataTransfer.getData('text');
+  const shipIcon = document.getElementById(data);
+  const length = Number(shipIcon.getAttribute('id'));
+  e.target.appendChild(shipIcon);
+  player1.allShips.forEach((boat) => {
+    if (boat.length === length) {
+      console.log(boat);
+    }
+  });
+  // const coordinates = e.target.getAttribute('data-set').split(',');
+  // player1.placeShip(coordinates[0], coordinates[1])
+}
+
+function handleDragStart(e) {
+  e.dataTransfer.setData('text', e.target.id);
+}
+
 function handleComputerAttack() {
   const choice = computer.getComputerChoice();
   const spot = domstuff.getSpot(choice);
@@ -94,4 +113,12 @@ function handleSendAttack(e) {
 gameLoop();
 console.log(computer.computerCopy);
 
-export { randomlyPlaceShips, gameLoop, handleSendAttack, handleGameOver, handleComputerAttack };
+export {
+  randomlyPlaceShips,
+  gameLoop,
+  handleSendAttack,
+  handleGameOver,
+  handleComputerAttack,
+  handleDragStart,
+  handleDrop,
+};

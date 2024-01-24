@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-cycle
-import { handleSendAttack } from './app';
+import { handleSendAttack, handleDragStart, handleDrop } from './app';
 
 export default (function domstuff() {
   const boardContainer = document.querySelector('.gameboard-container');
@@ -34,6 +34,10 @@ export default (function domstuff() {
         }
         gridUnit.classList.add('board-unit');
         gridUnit.setAttribute('data-set', [spotIndex, rowIndex]);
+        gridUnit.addEventListener('dragover', (e) => {
+          e.preventDefault();
+        });
+        gridUnit.addEventListener('drop', handleDrop);
         if (computer === true) {
           gridUnit.addEventListener('click', handleSendAttack);
           gridUnit.classList.add('computer');
@@ -45,10 +49,12 @@ export default (function domstuff() {
 
   const createShipList = (player) => {
     const shipContainer = document.querySelector('.ship-container');
-    const allShips = [player.smallShip, player.medShip, player.lrgShip];
-    allShips.forEach((boat) => {
+    player.allShips.forEach((boat) => {
       const shipIcon = document.createElement('div');
       const shipPlacementHolder = document.createElement('h1');
+      shipIcon.setAttribute('id', boat.length);
+      shipIcon.setAttribute('draggable', true);
+      shipIcon.addEventListener('dragstart', handleDragStart);
       shipPlacementHolder.textContent = boat.length;
       shipContainer.append(shipIcon);
       shipIcon.append(shipPlacementHolder);
