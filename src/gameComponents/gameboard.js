@@ -26,6 +26,7 @@ export default class GameBoard {
   }
 
   horizontalShipPlace(x, y, ship, coordinatesArr) {
+    console.log(x, y);
     let xInt = x;
     let { length } = ship;
     while (length !== 0) {

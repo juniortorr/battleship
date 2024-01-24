@@ -6,6 +6,7 @@ import domstuff from './domstuff';
 const createPlayer = () => new GameBoard();
 let computer = createPlayer();
 let player1 = createPlayer();
+let currentDirection = 'horizontal';
 
 const randomDirection = () => {
   if (Math.floor(Math.random() * 10) < 5) {
@@ -74,14 +75,23 @@ function handleDrop(e) {
   const data = e.dataTransfer.getData('text');
   const shipIcon = document.getElementById(data);
   const length = Number(shipIcon.getAttribute('id'));
+  const coordinates = e.target.getAttribute('data-set').split(',');
   e.target.appendChild(shipIcon);
   player1.allShips.forEach((boat) => {
     if (boat.length === length) {
-      console.log(boat);
+      player1.placeShip(Number(coordinates[0]), Number(coordinates[1]), boat, currentDirection);
+      console.log(player1.board);
     }
   });
-  // const coordinates = e.target.getAttribute('data-set').split(',');
-  // player1.placeShip(coordinates[0], coordinates[1])
+}
+
+function handleSliderToggle() {
+  if (currentDirection === 'horizontal') {
+    currentDirection = 'vertical';
+  } else {
+    currentDirection = 'horizontal';
+  }
+  domstuff.toggleSlider();
 }
 
 function handleDragStart(e) {
@@ -120,4 +130,5 @@ export {
   handleComputerAttack,
   handleDragStart,
   handleDrop,
+  handleSliderToggle,
 };

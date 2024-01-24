@@ -1,8 +1,9 @@
 // eslint-disable-next-line import/no-cycle
-import { handleSendAttack, handleDragStart, handleDrop } from './app';
+import { handleSendAttack, handleDragStart, handleDrop, handleSliderToggle } from './app';
 
 export default (function domstuff() {
   const boardContainer = document.querySelector('.gameboard-container');
+  const sliderContainer = document.querySelector('.slider-container');
 
   const reset = () => {
     const gridRow = document.querySelector('.board-row');
@@ -34,13 +35,15 @@ export default (function domstuff() {
         }
         gridUnit.classList.add('board-unit');
         gridUnit.setAttribute('data-set', [spotIndex, rowIndex]);
-        gridUnit.addEventListener('dragover', (e) => {
-          e.preventDefault();
-        });
+
         gridUnit.addEventListener('drop', handleDrop);
         if (computer === true) {
           gridUnit.addEventListener('click', handleSendAttack);
           gridUnit.classList.add('computer');
+        } else {
+          gridUnit.addEventListener('dragover', (e) => {
+            e.preventDefault();
+          });
         }
         gridRow.append(gridUnit);
       }
@@ -76,6 +79,19 @@ export default (function domstuff() {
     return spot;
   };
 
+  const toggleSlider = () => {
+    const slider = document.querySelector('#slider');
+    if (slider.classList.contains('horizontal')) {
+      slider.classList.remove('horizontal');
+      slider.classList.add('vertical');
+    } else {
+      slider.classList.remove('vertical');
+      slider.classList.add('horizontal');
+    }
+  };
+
+  sliderContainer.addEventListener('click', handleSliderToggle);
+
   return {
     handleSendAttack,
     createPlayerBoard,
@@ -84,5 +100,6 @@ export default (function domstuff() {
     targetHit,
     getSpot,
     createShipList,
+    toggleSlider,
   };
 })();

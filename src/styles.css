@@ -50,12 +50,19 @@ h1 {
   position: absolute;
   height: 100%;
   width: 50%;
-  left: 0;
   background-color: lightblue;
+  transition: all 1s ease-in-out;
 }
 
 .direction {
   z-index: 1;
   width: 50%;
   text-align: center;
+}
+
+.horizontal {
+  left: 0;
+}
+.vertical {
+  right: 0;
 }
