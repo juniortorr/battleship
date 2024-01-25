@@ -66,3 +66,7 @@ h1 {
 .vertical {
   right: 0;
 }
+
+.hide {
+  display: none;
+}

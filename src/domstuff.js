@@ -38,8 +38,8 @@ export default (function domstuff() {
 
         gridUnit.addEventListener('drop', handleDrop);
         if (computer === true) {
+          playerContainer.classList.add('computer-container', 'hide');
           gridUnit.addEventListener('click', handleSendAttack);
-          gridUnit.classList.add('computer');
         } else {
           gridUnit.addEventListener('dragover', (e) => {
             e.preventDefault();
@@ -48,6 +48,11 @@ export default (function domstuff() {
         gridRow.append(gridUnit);
       }
     });
+  };
+
+  const removeHiddenClass = () => {
+    const computerContainer = document.querySelector('.computer-container');
+    computerContainer.classList.remove('hide');
   };
 
   const createShipList = (player) => {
@@ -101,5 +106,6 @@ export default (function domstuff() {
     getSpot,
     createShipList,
     toggleSlider,
+    removeHiddenClass,
   };
 })();

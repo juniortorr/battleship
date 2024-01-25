@@ -12,6 +12,7 @@ export default class GameBoard {
     this.medShip = new Ship(3);
     this.lrgShip = new Ship(5);
     this.allShips = [this.smallShip, this.medShip, this.lrgShip];
+    this.shipsToPlace = 3;
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -38,6 +39,7 @@ export default class GameBoard {
       length -= 1;
       xInt += 1;
     }
+    this.shipsToPlace -= 1;
     return 'success!';
   }
 
@@ -53,6 +55,7 @@ export default class GameBoard {
       length -= 1;
       yInt += 1;
     }
+    this.shipsToPlace -= 1;
     return 'success!';
   }
 
@@ -67,6 +70,7 @@ export default class GameBoard {
     if (results === 'invalid coordinates') {
       return results;
     }
+
     return coordinatesArr;
   }
 
@@ -91,6 +95,10 @@ export default class GameBoard {
       return 'game over';
     }
     return this.shipsAlive;
+  }
+
+  getShipsToPlace() {
+    return this.shipsToPlace;
   }
 
   // eslint-disable-next-line class-methods-use-this

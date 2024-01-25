@@ -77,12 +77,16 @@ function handleDrop(e) {
   const length = Number(shipIcon.getAttribute('id'));
   const coordinates = e.target.getAttribute('data-set').split(',');
   e.target.appendChild(shipIcon);
+  shipIcon.setAttribute('draggable', false);
   player1.allShips.forEach((boat) => {
     if (boat.length === length) {
       player1.placeShip(Number(coordinates[0]), Number(coordinates[1]), boat, currentDirection);
       console.log(player1.board);
     }
   });
+  if (player1.getShipsToPlace() < 1) {
+    domstuff.removeHiddenClass();
+  }
 }
 
 function handleSliderToggle() {
@@ -120,7 +124,6 @@ function handleSendAttack(e) {
 }
 
 gameLoop();
-console.log(computer.computerCopy);
 
 export {
   randomlyPlaceShips,
