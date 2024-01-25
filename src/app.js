@@ -89,6 +89,7 @@ function handleDrop(e) {
       } else {
         e.target.appendChild(shipIcon);
         shipIcon.setAttribute('draggable', false);
+        shipIcon.setAttribute('data-set', coordinates);
         console.log(player1.board);
       }
     }

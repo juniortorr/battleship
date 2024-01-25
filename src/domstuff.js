@@ -59,14 +59,12 @@ export default (function domstuff() {
   const createShipList = (player) => {
     const shipContainer = document.querySelector('.ship-container');
     player.allShips.forEach((boat) => {
-      const shipIcon = document.createElement('div');
-      const shipPlacementHolder = document.createElement('h1');
+      const shipIcon = document.createElement('h1');
       shipIcon.setAttribute('id', boat.length);
       shipIcon.setAttribute('draggable', true);
       shipIcon.addEventListener('dragstart', handleDragStart);
-      shipPlacementHolder.textContent = boat.length;
+      shipIcon.textContent = boat.length;
       shipContainer.append(shipIcon);
-      shipIcon.append(shipPlacementHolder);
     });
   };
 
