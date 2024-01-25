@@ -19,14 +19,15 @@ const randomCoordinates = (ship, board) => {
   const x = Math.floor(Math.random() * 10);
   const y = Math.floor(Math.random() * 10);
   const direction = randomDirection();
+  let results;
   if (board[y][x] !== null) {
     randomCoordinates(ship, board);
   } else if (direction === 'horizontal' && x + (ship.length - 1) <= 9) {
-    return [x, y, direction];
+    results = [x, y, direction];
   } else if (direction === 'vertical' && y + (ship.length - 1) <= 9) {
-    return [x, y, direction];
+    results = [x, y, direction];
   }
-  return randomCoordinates(ship, board);
+  return results;
 };
 
 const randomlyPlaceShips = (player) => {
