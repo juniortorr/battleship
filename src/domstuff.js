@@ -53,6 +53,7 @@ export default (function domstuff() {
   const removeHiddenClass = () => {
     const computerContainer = document.querySelector('.computer-container');
     computerContainer.classList.remove('hide');
+    sliderContainer.classList.add('hide');
   };
 
   const createShipList = (player) => {

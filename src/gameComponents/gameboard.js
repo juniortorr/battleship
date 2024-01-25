@@ -27,19 +27,18 @@ export default class GameBoard {
   }
 
   horizontalShipPlace(x, y, ship, coordinatesArr) {
-    console.log(x, y);
     let xInt = x;
     let { length } = ship;
     while (length !== 0) {
       if (xInt + (length - 1) > 9 || xInt < 0) {
-        return console.log('invalid coordinates', x, y, ship);
+        console.log('invalid coordinates', x, y, ship);
+        return 'invalid coordinates';
       }
       this.board[y][xInt] = ship;
       coordinatesArr.push([xInt, y]);
       length -= 1;
       xInt += 1;
     }
-    this.shipsToPlace -= 1;
     return 'success!';
   }
 
@@ -48,30 +47,33 @@ export default class GameBoard {
     let { length } = ship;
     while (length !== 0) {
       if (yInt + (length - 1) > 9 || yInt < 0) {
-        return console.log('invalid coordinates', x, y, ship);
+        console.log('invalid coordinates', x, y, ship);
+        return 'invalid coordinates';
       }
       this.board[yInt][x] = ship;
       coordinatesArr.push([yInt, x]);
       length -= 1;
       yInt += 1;
     }
-    this.shipsToPlace -= 1;
     return 'success!';
   }
 
   placeShip(x, y, ship, direction) {
     const coordinatesArr = [];
     let results;
+    if (this.board[y][x] !== null) {
+      return 'invalid coordinates';
+    }
     if (direction === 'horizontal') {
       results = this.horizontalShipPlace(x, y, ship, coordinatesArr);
     } else if (direction === 'vertical') {
       results = this.verticalShipPlace(x, y, ship, coordinatesArr);
     }
-    if (results === 'invalid coordinates') {
-      return results;
+    if (results !== 'invalid coordinates') {
+      this.shipsToPlace -= 1;
+      console.log(this.shipsToPlace);
     }
-
-    return coordinatesArr;
+    return results;
   }
 
   receiveAttack(x, y) {

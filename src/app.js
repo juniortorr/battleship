@@ -72,16 +72,25 @@ const checkHitResults = (results, spot) => {
 
 function handleDrop(e) {
   e.preventDefault();
+  const coordinates = e.target.getAttribute('data-set').split(',');
   const data = e.dataTransfer.getData('text');
   const shipIcon = document.getElementById(data);
   const length = Number(shipIcon.getAttribute('id'));
-  const coordinates = e.target.getAttribute('data-set').split(',');
-  e.target.appendChild(shipIcon);
-  shipIcon.setAttribute('draggable', false);
+
   player1.allShips.forEach((boat) => {
     if (boat.length === length) {
-      player1.placeShip(Number(coordinates[0]), Number(coordinates[1]), boat, currentDirection);
-      console.log(player1.board);
+      if (
+        player1
+          .placeShip(Number(coordinates[0]), Number(coordinates[1]), boat, currentDirection)
+          .includes('invalid coordinates')
+      ) {
+        console.log('error! cannot place ship');
+        console.log(player1.board);
+      } else {
+        e.target.appendChild(shipIcon);
+        shipIcon.setAttribute('draggable', false);
+        console.log(player1.board);
+      }
     }
   });
   if (player1.getShipsToPlace() < 1) {
