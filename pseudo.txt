@@ -46,13 +46,12 @@ Computer
     
 
         TOMORROW!!!!!
-            - stop computer random function from landing on itself
             - create a place ships prompt for when users first load into the game
             - create game over pop up
             - create a start over button 
             - display the amount of time that a user and computer have missed
             - get(or create!) images for ships 
-            - add scoreboard
+            - add scoreboard object
 
 
 
