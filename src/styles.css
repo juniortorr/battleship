@@ -1,7 +1,7 @@
-h1 {
-  color: red;
+.header {
+  width: 100%;
+  text-align: center;
 }
-
 .gameboard-container {
   display: flex;
   justify-content: center;
@@ -43,7 +43,6 @@ h1 {
   width: 400px;
   align-items: center;
   flex-direction: column;
-  height: 300px;
 }
 .slider-container {
   position: relative;
@@ -74,10 +73,6 @@ h1 {
 }
 .vertical {
   right: 0;
-}
-
-.hide {
-  display: none;
 }
 
 .battleship {
@@ -116,4 +111,21 @@ h1 {
 .large-ship-vertical {
   height: 270px;
   width: 54px;
+}
+.game-over-popup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  z-index: 5;
+  left: 35%;
+  top: 200px;
+  height: 400px;
+  width: 600px;
+  background-color: lightblue;
+}
+
+.hide {
+  display: none;
 }

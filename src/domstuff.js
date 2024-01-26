@@ -1,5 +1,12 @@
 // eslint-disable-next-line import/no-cycle
-import { handleSendAttack, handleDragStart, handleDrop, handleSliderToggle } from './app';
+import {
+  handleSendAttack,
+  handleDragStart,
+  handleDrop,
+  handleSliderToggle,
+  gameLoop,
+  handleGameOver,
+} from './app';
 import shipImg from './images/boat2.png';
 import shipHorizontal from './images/boat-horizontal.png';
 
@@ -54,6 +61,8 @@ export default (function domstuff() {
 
   const removeHiddenClass = () => {
     const computerContainer = document.querySelector('.computer-container');
+    const header = document.querySelector('.header');
+    header.classList.add('hide');
     computerContainer.classList.remove('hide');
     sliderContainer.classList.add('hide');
   };
@@ -136,6 +145,18 @@ export default (function domstuff() {
     turnShips();
   };
 
+  const showGameOverPopup = () => {
+    const gameOverPopup = document.querySelector('.game-over-popup');
+    const startOverBtn = document.querySelector('.start-over-btn');
+    gameOverPopup.classList.remove('hide');
+    startOverBtn.addEventListener('click', handleGameOver);
+  };
+
+  const hidePopup = () => {
+    const gameOverPopup = document.querySelector('.game-over-popup');
+    gameOverPopup.classList.add('hide');
+  };
+
   sliderContainer.addEventListener('click', handleSliderToggle);
 
   return {
@@ -148,5 +169,7 @@ export default (function domstuff() {
     createShipList,
     toggleSlider,
     removeHiddenClass,
+    showGameOverPopup,
+    hidePopup,
   };
 })();

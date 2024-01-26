@@ -47,7 +47,6 @@ Computer
 
         TOMORROW!!!!!
             
-            - create a place ships prompt for when users first load into the game
             - create game over pop up
             - create a start over button 
             - display the amount of time that a user and computer have missed

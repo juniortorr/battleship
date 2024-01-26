@@ -51,6 +51,7 @@ const gameLoop = () => {
 };
 
 const handleGameOver = () => {
+  domstuff.hidePopup();
   computer = createPlayer();
   player1 = createPlayer();
   domstuff.reset();
@@ -60,15 +61,16 @@ const handleGameOver = () => {
 const checkHitResults = (results, spot) => {
   if (results.includes('hit!')) {
     domstuff.targetHit(spot);
-    return console.log('player 1 hit');
+    return console.log('hit');
   }
   if (results.includes('miss')) {
     domstuff.targetMissed(spot);
-    return console.log('computer missed ya nerd');
+    return console.log('missed');
   }
   if (results === 'game over') {
-    return handleGameOver();
+    return domstuff.showGameOverPopup();
   }
+  console.log(results);
   return results;
 };
 
@@ -123,6 +125,9 @@ function handleComputerAttack() {
   const spot = domstuff.getSpot(choice);
   const hitResults = player1.receiveAttack(choice[0], choice[1]);
   console.log('player ships alive:', player1.checkShipsAlive());
+  if (player1.checkShipsAlive() === 'game over') {
+    return domstuff.showGameOverPopup();
+  }
   return checkHitResults(hitResults, spot);
 }
 
@@ -135,6 +140,9 @@ function handleSendAttack(e) {
   const coordinates = coordinatesString.split(',');
   const hitResults = computer.receiveAttack(coordinates[0], coordinates[1]);
   console.log('computer ships alive:', computer.checkShipsAlive());
+  if (computer.checkShipsAlive() === 'game over') {
+    return domstuff.showGameOverPopup();
+  }
   handleComputerAttack();
   return checkHitResults(hitResults, selectedSpot);
 }
