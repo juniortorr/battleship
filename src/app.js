@@ -21,11 +21,14 @@ const randomCoordinates = (ship, board) => {
   const direction = randomDirection();
   let results;
   if (board[y][x] !== null) {
-    randomCoordinates(ship, board);
-  } else if (direction === 'horizontal' && x + (ship.length - 1) <= 9) {
+    return randomCoordinates(ship, board);
+  }
+  if (direction === 'horizontal' && x + (ship.length - 1) <= 9) {
     results = [x, y, direction];
   } else if (direction === 'vertical' && y + (ship.length - 1) <= 9) {
     results = [x, y, direction];
+  } else {
+    return randomCoordinates(ship, board);
   }
   return results;
 };
@@ -91,6 +94,8 @@ function handleDrop(e) {
         e.target.appendChild(shipIcon);
         shipIcon.setAttribute('draggable', false);
         shipIcon.setAttribute('data-set', coordinates);
+        shipIcon.classList.add('battleship');
+        shipIcon.classList.remove('player-1-ship');
         console.log(player1.board);
       }
     }

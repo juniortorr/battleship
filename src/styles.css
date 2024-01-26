@@ -15,6 +15,8 @@ h1 {
   width: 50px;
   height: 50px;
   border: 2px solid black;
+  position: relative;
+  overflow: none;
 }
 .computer:hover {
   background-color: lightcyan;
@@ -30,11 +32,18 @@ h1 {
 .hit {
   background-color: rebeccapurple;
 }
-.ship-container {
+.game-piece-container {
   display: flex;
   justify-content: center;
   margin: 0 auto;
   gap: 20px;
+}
+.ship-container {
+  display: flex;
+  width: 400px;
+  align-items: center;
+  flex-direction: column;
+  height: 300px;
 }
 .slider-container {
   position: relative;
@@ -51,7 +60,7 @@ h1 {
   height: 100%;
   width: 50%;
   background-color: lightblue;
-  transition: all 1s ease-in-out;
+  transition: all 3s ease-in-out;
 }
 
 .direction {
@@ -69,4 +78,42 @@ h1 {
 
 .hide {
   display: none;
+}
+
+.battleship {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.smallShip-horizontal {
+  height: 54px;
+  width: 108px;
+}
+.medShip-horizontal {
+  height: 54px;
+  width: 162px;
+}
+.largeShip-horizontal {
+  height: 54px;
+  width: 270px;
+}
+
+.ship-container-vertical {
+  flex-direction: row;
+}
+.rotate {
+  transform: rotate(-90deg);
+}
+.small-ship-vertical {
+  height: 108px;
+  width: 54px;
+}
+.med-ship-vertical {
+  height: 162px;
+  width: 54px;
+}
+.large-ship-vertical {
+  height: 270px;
+  width: 54px;
 }
