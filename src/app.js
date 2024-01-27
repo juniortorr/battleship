@@ -37,7 +37,13 @@ const randomlyPlaceShips = (player) => {
   const allShips = [player.smallShip, player.medShip, player.lrgShip];
   allShips.forEach((ship) => {
     const coordinates = randomCoordinates(ship, player.board);
-    player.placeShip(coordinates[0], coordinates[1], ship, coordinates[2]);
+    if (
+      player.placeShip(coordinates[0], coordinates[1], ship, coordinates[2]) ===
+      'invalid coordinates'
+    ) {
+      const newCoordinates = randomCoordinates(ship, player.board);
+      player.placeShip(newCoordinates[0], newCoordinates[1], ship, newCoordinates[2]);
+    }
   });
   return 'success';
 };
@@ -48,6 +54,7 @@ const gameLoop = () => {
   domstuff.createPlayerBoard(player1.board);
   domstuff.createPlayerBoard(computer.board, true);
   domstuff.createShipList(player1);
+  domstuff.updateMissedShotsUI();
 };
 
 const handleGameOver = () => {
@@ -57,6 +64,8 @@ const handleGameOver = () => {
   domstuff.reset();
   gameLoop();
 };
+
+const getMissedShotData = () => [player1.missedAttacks, computer.missedAttacks];
 
 const checkHitResults = (results, spot) => {
   if (results.includes('hit!')) {
@@ -144,6 +153,7 @@ function handleSendAttack(e) {
     return domstuff.showGameOverPopup();
   }
   handleComputerAttack();
+  domstuff.updateMissedShotsUI();
   return checkHitResults(hitResults, selectedSpot);
 }
 
@@ -158,4 +168,5 @@ export {
   handleDragStart,
   handleDrop,
   handleSliderToggle,
+  getMissedShotData,
 };

@@ -30,15 +30,18 @@ export default class GameBoard {
     let xInt = x;
     let { length } = ship;
     while (length !== 0) {
-      if (xInt + (length - 1) > 9 || xInt < 0) {
+      if (xInt + (length - 1) > 9 || xInt < 0 || this.board[y][xInt] !== null) {
         console.log('invalid coordinates', x, y, ship);
         return 'invalid coordinates';
       }
-      this.board[y][xInt] = ship;
       coordinatesArr.push([xInt, y]);
       length -= 1;
       xInt += 1;
     }
+    console.log(coordinatesArr);
+    coordinatesArr.forEach((pair) => {
+      this.board[pair[1]][pair[0]] = ship;
+    });
     return 'success!';
   }
 
@@ -46,15 +49,19 @@ export default class GameBoard {
     let yInt = y;
     let { length } = ship;
     while (length !== 0) {
-      if (yInt + (length - 1) > 9 || yInt < 0) {
+      if (yInt + (length - 1) > 9 || yInt < 0 || this.board[yInt][x] !== null) {
         console.log('invalid coordinates', x, y, ship);
         return 'invalid coordinates';
       }
-      this.board[yInt][x] = ship;
+      // this.board[yInt][x] = ship;
       coordinatesArr.push([yInt, x]);
       length -= 1;
       yInt += 1;
     }
+    console.log(coordinatesArr);
+    coordinatesArr.forEach((pair) => {
+      this.board[pair[1]][pair[0]] = ship;
+    });
     return 'success!';
   }
 
