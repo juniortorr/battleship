@@ -8,13 +8,29 @@
   <body>
     <div class="header"><h1>Place Ships</h1></div>
 
-    <div class="gameboard-container"></div>
+    <div class="game-container">
+      <div class="sidebar">
+        <div class="game-stats">
+          <div class="computer-missed-shots game-stat">
+            <h2>Computer Missed Shots</h2>
+            <p id="missed-shots"></p>
+          </div>
+          <div class="player1-missed-shots game-stat">
+            <h2>Player 1 Missed Shots</h2>
+            <p id="missed-shots"></p>
+          </div>
+        </div>
+      </div>
+      <div class="gameboard-container"></div>
+    </div>
+
     <div class="game-piece-container">
       <div class="slider-container">
         <p class="direction" id="horizontal">Horizontal</p>
         <p class="direction" id="vertical">Vertical</p>
         <div class="slider horizontal" id="slider"></div>
       </div>
+
       <div class="ship-container"></div>
       <div class="game-over-popup hide">
         <h1 class="game-over-text">Game Over</h1>

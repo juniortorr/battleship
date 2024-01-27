@@ -4,8 +4,8 @@ import {
   handleDragStart,
   handleDrop,
   handleSliderToggle,
-  gameLoop,
   handleGameOver,
+  getMissedShotData,
 } from './app';
 import shipImg from './images/boat2.png';
 import shipHorizontal from './images/boat-horizontal.png';
@@ -59,44 +59,6 @@ export default (function domstuff() {
     });
   };
 
-  const removeHiddenClass = () => {
-    const computerContainer = document.querySelector('.computer-container');
-    const header = document.querySelector('.header');
-    header.classList.add('hide');
-    computerContainer.classList.remove('hide');
-    sliderContainer.classList.add('hide');
-  };
-
-  const createShipList = (player) => {
-    const shipContainer = document.querySelector('.ship-container');
-    const shipClasses = ['smallShip-horizontal', 'medShip-horizontal', 'largeShip-horizontal'];
-    player.allShips.forEach((boat) => {
-      const shipIcon = document.createElement('img');
-      shipIcon.src = shipHorizontal;
-      shipIcon.classList.add(shipClasses[0], 'player-1-ship');
-      shipIcon.setAttribute('id', boat.length);
-      shipIcon.setAttribute('draggable', true);
-      shipIcon.addEventListener('dragstart', handleDragStart);
-      shipContainer.append(shipIcon);
-      shipClasses.splice(0, 1);
-    });
-  };
-
-  const targetMissed = (unit) => {
-    unit.classList.add('missed');
-    unit.setAttribute('data-targeted', true);
-  };
-
-  const targetHit = (unit) => {
-    unit.classList.add('hit');
-    unit.setAttribute('data-targeted', true);
-  };
-
-  const getSpot = (coordinates) => {
-    const spot = document.querySelector(`[data-set="${coordinates[0]},${coordinates[1]}"]`);
-    return spot;
-  };
-
   const turnShips = () => {
     const ships = document.querySelectorAll('.player-1-ship');
     const container = document.querySelector('.ship-container');
@@ -145,6 +107,48 @@ export default (function domstuff() {
     turnShips();
   };
 
+  const removeHiddenClass = () => {
+    const computerContainer = document.querySelector('.computer-container');
+    const header = document.querySelector('.header');
+    const slider = document.querySelector('.slider');
+    header.classList.add('hide');
+    computerContainer.classList.remove('hide');
+    sliderContainer.classList.add('hide');
+    if (slider.classList.contains('vertical')) {
+      toggleSlider();
+    }
+  };
+
+  const createShipList = (player) => {
+    const shipContainer = document.querySelector('.ship-container');
+    const shipClasses = ['smallShip-horizontal', 'medShip-horizontal', 'largeShip-horizontal'];
+    player.allShips.forEach((boat) => {
+      const shipIcon = document.createElement('img');
+      shipIcon.src = shipHorizontal;
+      shipIcon.classList.add(shipClasses[0], 'player-1-ship');
+      shipIcon.setAttribute('id', boat.length);
+      shipIcon.setAttribute('draggable', true);
+      shipIcon.addEventListener('dragstart', handleDragStart);
+      shipContainer.append(shipIcon);
+      shipClasses.splice(0, 1);
+    });
+  };
+
+  const targetMissed = (unit) => {
+    unit.classList.add('missed');
+    unit.setAttribute('data-targeted', true);
+  };
+
+  const targetHit = (unit) => {
+    unit.classList.add('hit');
+    unit.setAttribute('data-targeted', true);
+  };
+
+  const getSpot = (coordinates) => {
+    const spot = document.querySelector(`[data-set="${coordinates[0]},${coordinates[1]}"]`);
+    return spot;
+  };
+
   const showGameOverPopup = () => {
     const gameOverPopup = document.querySelector('.game-over-popup');
     const startOverBtn = document.querySelector('.start-over-btn');
@@ -152,9 +156,22 @@ export default (function domstuff() {
     startOverBtn.addEventListener('click', handleGameOver);
   };
 
+  const updateMissedShotsUI = () => {
+    const missedShotDisplays = document.querySelectorAll('#missed-shots');
+    const missedShotData = getMissedShotData();
+    missedShotDisplays.forEach((display) => {
+      console.log(display);
+      const shotDisplay = display;
+      const missedShot = missedShotData[0];
+      shotDisplay.textContent = missedShot;
+      missedShotData.splice(0, 1);
+    });
+  };
+
   const hidePopup = () => {
     const gameOverPopup = document.querySelector('.game-over-popup');
     gameOverPopup.classList.add('hide');
+    sliderContainer.classList.remove('hide');
   };
 
   sliderContainer.addEventListener('click', handleSliderToggle);
@@ -171,5 +188,6 @@ export default (function domstuff() {
     removeHiddenClass,
     showGameOverPopup,
     hidePopup,
+    updateMissedShotsUI,
   };
 })();
