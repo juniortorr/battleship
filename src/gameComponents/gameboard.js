@@ -38,7 +38,7 @@ export default class GameBoard {
       length -= 1;
       xInt += 1;
     }
-    console.log(coordinatesArr);
+
     coordinatesArr.forEach((pair) => {
       this.board[pair[1]][pair[0]] = ship;
     });
@@ -58,7 +58,7 @@ export default class GameBoard {
       length -= 1;
       yInt += 1;
     }
-    console.log(coordinatesArr);
+
     coordinatesArr.forEach((pair) => {
       this.board[pair[1]][pair[0]] = ship;
     });

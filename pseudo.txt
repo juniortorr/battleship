@@ -47,7 +47,6 @@ Computer
 
         TOMORROW!!!!!
             
-            - create game over pop up
             - create a start over button 
             - display the amount of time that a user and computer have missed
             - add scoreboard object

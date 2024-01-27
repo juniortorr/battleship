@@ -45,6 +45,7 @@ const randomlyPlaceShips = (player) => {
       player.placeShip(newCoordinates[0], newCoordinates[1], ship, newCoordinates[2]);
     }
   });
+  console.log(player.board);
   return 'success';
 };
 
@@ -58,10 +59,10 @@ const gameLoop = () => {
 };
 
 const handleGameOver = () => {
-  domstuff.hidePopup();
+  domstuff.resetUI();
   computer = createPlayer();
   player1 = createPlayer();
-  domstuff.reset();
+  domstuff.resetBoard();
   gameLoop();
 };
 
@@ -107,12 +108,12 @@ function handleDrop(e) {
         shipIcon.setAttribute('data-set', coordinates);
         shipIcon.classList.add('battleship');
         shipIcon.classList.remove('player-1-ship');
-        console.log(player1.board);
       }
     }
   });
   if (player1.getShipsToPlace() < 1) {
-    domstuff.removeHiddenClass();
+    domstuff.showRoundSetup();
+    console.log(player1.board);
   }
 }
 

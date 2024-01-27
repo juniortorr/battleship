@@ -6,10 +6,13 @@
     <title>Document</title>
   </head>
   <body>
-    <div class="header"><h1>Place Ships</h1></div>
+    <div class="navbar">
+      <h1>Battleship</h1>
+    </div>
+    <div class="header"><h1>Drag to Place Ships!</h1></div>
 
     <div class="game-container">
-      <div class="sidebar">
+      <div class="sidebar hide">
         <div class="game-stats">
           <div class="computer-missed-shots game-stat">
             <h2>Computer Missed Shots</h2>
@@ -32,10 +35,10 @@
       </div>
 
       <div class="ship-container"></div>
-      <div class="game-over-popup hide">
-        <h1 class="game-over-text">Game Over</h1>
-        <button class="start-over-btn">Start Over</button>
-      </div>
+    </div>
+    <div class="game-over-popup hide">
+      <h1 class="game-over-text">Game Over</h1>
+      <button class="start-over-btn">Start Over</button>
     </div>
   </body>
 </html>

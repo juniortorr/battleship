@@ -14,7 +14,7 @@ export default (function domstuff() {
   const boardContainer = document.querySelector('.gameboard-container');
   const sliderContainer = document.querySelector('.slider-container');
 
-  const reset = () => {
+  const resetBoard = () => {
     const gridRow = document.querySelector('.board-row');
     const playerContainer = document.querySelector('.player-container');
     while (gridRow.firstChild) {
@@ -107,13 +107,16 @@ export default (function domstuff() {
     turnShips();
   };
 
-  const removeHiddenClass = () => {
+  const showRoundSetup = () => {
     const computerContainer = document.querySelector('.computer-container');
     const header = document.querySelector('.header');
+    const shipBank = document.querySelector('.game-piece-container');
     const slider = document.querySelector('.slider');
+    const sidebar = document.querySelector('.sidebar');
+    sidebar.classList.remove('hide');
     header.classList.add('hide');
     computerContainer.classList.remove('hide');
-    sliderContainer.classList.add('hide');
+    shipBank.classList.add('hide');
     if (slider.classList.contains('vertical')) {
       toggleSlider();
     }
@@ -168,10 +171,15 @@ export default (function domstuff() {
     });
   };
 
-  const hidePopup = () => {
+  const resetUI = () => {
     const gameOverPopup = document.querySelector('.game-over-popup');
+    const shipBank = document.querySelector('.game-piece-container');
+    const sidebar = document.querySelector('.sidebar');
+    const header = document.querySelector('.header');
     gameOverPopup.classList.add('hide');
-    sliderContainer.classList.remove('hide');
+    shipBank.classList.remove('hide');
+    sidebar.classList.add('hide');
+    header.classList.remove('hide');
   };
 
   sliderContainer.addEventListener('click', handleSliderToggle);
@@ -179,15 +187,15 @@ export default (function domstuff() {
   return {
     handleSendAttack,
     createPlayerBoard,
-    reset,
+    resetBoard,
     targetMissed,
     targetHit,
     getSpot,
     createShipList,
     toggleSlider,
-    removeHiddenClass,
+    showRoundSetup,
     showGameOverPopup,
-    hidePopup,
+    resetUI,
     updateMissedShotsUI,
   };
 })();
