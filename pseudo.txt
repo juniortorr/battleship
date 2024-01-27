@@ -48,7 +48,8 @@ Computer
         TOMORROW!!!!!
             
             - create a start over button 
-            - display the amount of time that a user and computer have missed
+            - fix slider bug that wont use animation.
+            - change color of target confirmed and target missed
             - add scoreboard object
 
 

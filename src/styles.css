@@ -201,9 +201,9 @@ table {
 /* .ship {
   background-color: #4b5320;
 } */
-.player-1-ship {
+/* .player-1-ship {
   transition: all 0.2s;
-}
+} */
 
 .missed {
   background-color: grey;
@@ -237,12 +237,13 @@ table {
   box-sizing: border-box;
 }
 
-.slider {
+.slider,
+.horizontal {
   position: absolute;
   height: 50px;
   width: 45%;
   background-color: lightblue;
-  transition: all 3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   border-radius: 20px;
 }
 
@@ -256,7 +257,7 @@ table {
   left: 0;
 }
 .vertical {
-  right: 0;
+  left: 110px;
 }
 
 .battleship {
